@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>いらすとやさんでRPG</title>
+  <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script>
+  function transition(from,to,mod,complete){
+    mode = '';
+    $(from).fadeOut(500,function(){
+      $(to).fadeIn(500,function(){
+        mode = mod;
+        if(complete){
+          complete();
+        }
+      });
+    });
+  }
+  </script>
+  <script type="text/javascript" src="js/event.js"></script>
+  <script type="text/javascript" src="js/pc.js"></script>
+  <script type="text/javascript" src="js/enemy.js"></script>
+</head>
+<body>
+  <main>
+    <!-- タイトル画面 -->
+    <section id="title" class="title">
+      <h1>
+        <img src="images/hiragana_02_i.png"  alt="い" width="110" height="110">
+        <img src="images/hiragana_69_ra.png" alt="ら" width="110" height="110">
+        <img src="images/hiragana_23_su.png" alt="す" width="110" height="110">
+        <img src="images/hiragana_35_to.png" alt="と" width="110" height="110">
+        <img src="images/hiragana_66_ya.png" alt="や" width="110" height="110">
+        <img src="images/capital_r.png" alt="R" width="110" height="110">
+        <img src="images/capital_p.png" alt="P" width="110" height="110">
+        <img src="images/capital_g.png" alt="G" width="110" height="110">
+      </h1>
+      <a href="#">
+        <img src="images/capital_s.png" alt="R" width="110" height="110">
+        <img src="images/lower_t.png" alt="R" width="110" height="110">
+        <img src="images/lower_a.png" alt="R" width="110" height="110">
+        <img src="images/lower_r.png" alt="R" width="110" height="110">
+        <img src="images/lower_t.png" alt="R" width="110" height="110">
+      </a>
+      <script>
+      function title01(){
+        transition('.title','#event01','event01');
+      }
+      $('.title a').on('click',title01);
+      </script>
+    </section>
+
+    <!-- お城イベント1 -->
+    <section id="event01" class="event">
+      <div class="NPC">
+      </div>
+      <div class="textframe">
+        <p>
+          勇者 <span class="pcname"></span> よ、我が姫が狼男に攫われてしまったのじゃ。<br>
+          姫を助けてほしいのじゃ。<br>
+          狼男はこの城の北東の森にある洞窟に逃げ込んだそうじゃ。<br>
+          頼んだぞ勇者 ああああ よ。
+        </p>
+      </div>
+      <script>
+      function event01 () {
+        transition('#event01','#map','map');
+      }
+      $('#event01').on('click',event01);
+      </script>
+    </section>
+
+    <!-- 街イベント -->
+    <section id="event02" class="event">
+      <div class="NPC">
+      </div>
+      <div class="textframe">
+        <p>
+          勇者 <span class="pcname"></span> よ、お疲れ様です。<br>
+          しばし体を休めてください。<br>
+          『体力が回復した』
+        </p>
+      </div>
+      <script>
+      function event02 () {
+        transition('#event02','#map','map');
+        PC.showStatus();
+      }
+      $('#event02').on('click',event02);
+      </script>
+    </section>
+
+    <!-- 救出 -->
+    <section id="event03" class="event">
+      <div class="NPC">
+      </div>
+      <div class="textframe">
+        <p>
+          勇者 <span class="pcname"></span>様 助けてくれてありがとうございます。<br>
+          さあ、城に帰りましょう。
+        </p>
+      </div>
+      <script>
+      function event03 () {
+        transition('#event03','#event04','event04');
+      }
+      $('#event03').on('click',event03);
+      </script>
+    </section>
+
+    <!-- お城イベント2 -->
+    <section id="event04" class="event">
+      <div class="NPC">
+      </div>
+      <div class="textframe">
+        <p>
+          よくぞ、姫を助けて帰った、勇者 <span class="pcname"></span> よ。<br>
+          ほめてつかわすのじゃ。
+        </p>
+      </div>
+      <script>
+      function event04 () {
+        transition('#event04','#ending','ending');
+      }
+      $('#event04').on('click',event04);
+      </script>
+    </section>
+
+    <!-- エンディング -->
+    <section id="ending" class="event">
+      <img src="images/message_congratulations.png" width="300" height="66">
+      <script>
+      function ending01 () {
+        transition('#ending','#title','title');
+        gameInit();
+      }
+      $('#ending').on('click',ending01);
+      </script>
+    </section>
+
+    <!-- 死亡 -->
+    <section id="event14" class="event">
+      <img src="images/ohaka_souji_gyousya.png">
+      <div class="textframe">
+        <p>
+          『勇者 <span class="pcname"></span> は死んでしまった』<br>
+          - GAME OVER -
+        </p>
+      </div>
+      <script>
+      function event14 () {
+        transition('#event14','#title','title',function(){
+          gameInit();
+        });
+      }
+      $('#event14').on('click',event14);
+      </script>
+    </section>
+
+    <section id="map" style="display:none;">
+      <img class="compass" src="images/compass.png" width="100" height="100">
+      <ul>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+        <li class="mountain"></li>
+
+        <li class="mountain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="plain"></li>
+        <li class="plain"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="cave"></li>
+        <li class="mountain"></li>
+
+        <li class="mountain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="mountain"></li>
+
+        <li class="mountain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="city"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="mountain"></li>
+
+        <li class="mountain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="forest"></li>
+        <li class="plain"></li>
+        <li class="plain"></li>
+        <li class="plain"></li>
+        <li class="plain"></li>
+        <li class="mountain"></li>
+
+        <li class="mountain"></li>
+        <li class="castle"></li>
+        <li class="plain"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="forest"></li>
+        <li class="mountain"></li>
+
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+
+      </ul>
+      <div class="PC" style="display:none;">
+        <img src="images/yuusya_game.png" height="150">
+      </div>
+
+      <div class="textframe">
+        <p class="name">勇者 「<span class="pcname"></span>」HP: <span class="hp"></span>/<span class="hpMax"></span></p>
+        <p class="msg"></p>
+      </div>
+      <script>
+      function map01(e){
+        if( e.keyCode == 37 ) {      // 左
+          PC.move(PC.x-1,PC.y);
+        }else if(e.keyCode == 38 ) { // 上
+          PC.move(PC.x,PC.y-1);
+        }else if(e.keyCode == 39 ) { // 右
+          PC.move(PC.x+1,PC.y);
+        }else if(e.keyCode == 40 ) { // 下
+          PC.move(PC.x,PC.y+1);
+        }else if(PC.flag[0]) { // 洞窟発見後
+          PC.flag[1] = true;
+          PC.encount(2);
+        }
+      }
+      $('#map').on('click',map01);
+      </script>
+    </section>
+
+    <!-- 戦闘 -->
+    <section id="battle" class="battle">
+      <div class="enemy">
+        <img src="images/toy_slime_suraimu.png" class="slime">
+        <img src="images/fantasy_orc.png" class="orc">
+        <img src="images/fantasy_wolfman.png" class="werewolf">
+        <img src="images/fantasy_dragon.png" class="dragon">
+      </div>
+      <div class="textframe">
+        <p class="name">勇者 「<span class="pcname"></span>」HP: <span class="hp"></span>/<span class="hpMax"></span></p>
+        <p class="message"></p>
+        <div class="command">
+          <p class="attack"><span>&gt;</span><a href="#" >たたかう</a></p>
+          <p class="run"><span></span><a href="#" >にげる</a></p>
+        </div>
+      </div>
+      <script>
+      mode = 'battle';
+      $('.battle .command .attack a').on('click',function(){PC.attack();});
+      $('.battle .command .run a').on('click',function(){PC.run();});
+      function battle01 (e){
+       if( PC.hp <= 0 ) {
+          transition('.battle','#event14','event14');
+        }else if(PC.enemy == null) {
+          if(PC.flag[1]) {
+            transition('.battle','#event03','event03');
+          }else{
+            transition('.battle','#map','map');
+          }
+        }else if($('.battle .command').is(':hidden')){
+          PC.defense();
+        }else if(e) {
+          if( e.keyCode == 38 ) {      // 上 攻撃を選択
+            $('.battle .command .attack span').text('>');
+            $('.battle .command .run span').text(' ');
+          }else if(e.keyCode == 40 ) { // 下 にげるを選択
+            $('.battle .command .attack span').text(' ');
+            $('.battle .command .run span').text('>');
+          }else if(e.keyCode == 13 ) { // Enter
+            if( $('.battle .command .attack span').text() == '>' ) {
+              PC.attack();
+            }else{
+              PC.run();
+            }
+          }
+        }
+        return false;
+      }
+      $('.battle').on('click',battle01);
+      </script>
+    </section>
+  </main>
+
+  <script type="text/javascript">
+  var MAP = {WIDTH:9,HEIGHT:7};
+  var mode = 'title';
+  $(document).on('keydown',function(e){
+    console.log(e.keyCode);
+    if(mode == 'title') {
+      title01();
+    }else if(mode == 'event01'){
+      event01();
+    }else if(mode == 'event02'){
+      event02();
+    }else if(mode == 'event03'){
+      event03();
+    }else if(mode == 'event04'){
+      event04();
+    }else if(mode == 'ending'){
+      ending01();
+    }else if(mode == 'event14'){
+      event14();
+    }else if(mode == 'battle'){
+      battle01(e);
+    }else if(mode == 'map') {
+      map01(e);
+    }
+    return false;
+  });
+  function gameInit(){
+    mode = 'title';
+    PC.init($('.PC')).show();
+    $('.title').fadeIn(1000);
+    $('#map ul li:nth-child(11)').css('background-image','url(images/mori.png)');
+  }
+  gameInit();
+
+  </script>
+</body>
+</html>

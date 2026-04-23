@@ -1,0 +1,238 @@
+body {
+  background: gray;
+}
+
+main {
+  background: black;
+  width: 800px;
+  height: 600px;
+  margin:0 auto;
+}
+
+section {
+  overflow: hidden;
+  width:800px;
+  height:600px;
+  position: absolute;
+  padding:0;
+  display: none;
+}
+
+/* Title */
+
+.title {
+  background-image: url(../images/bg_natural_sougen.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: white;
+}
+
+.title h1 {
+  margin:70px auto;
+}
+
+.title a {
+  display: block;
+  width: 550px;
+  height:110px;
+  margin: 200px auto;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+.title img {
+  margin-left: -20px;
+}
+.title img:first-child {
+  margin: 0;
+}
+
+/* Event */
+
+.event {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.event .NPC {
+  position: absolute;
+  left:50%;
+  background-repeat: no-repeat;
+}
+
+.textframe {
+  width:780px;
+  height:300px;
+  position: absolute;
+  top:400px;
+  background-image: url(../images/room15_blank.png);
+  padding:20px 50px 20px;
+}
+
+.textframe p {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-shadow: 1px 0px 0px #FFF, 0px 1px 0px #FFF, -1px 0px 0px #FFF, 0px -1px 0px #FFF;
+  margin: 0.2em 1em;
+}
+
+#event01,
+#event04
+{
+  background-image: url(../images/bg_doujou.jpg);
+}
+
+#event01 .NPC,
+#event04 .NPC
+ {
+  background-image: url(../images/king.png);
+  width:305px;
+  height:400px;
+  margin-left: -152px;
+  top:140px;
+}
+
+#event02 {
+  background-image: url(../images/bg_doujou.jpg);
+}
+
+#event02 .NPC {
+  background-image: url(../images/job_tenin_woman_glasses.png);
+  width:305px;
+  height:400px;
+  margin-left: -152px;
+  top:140px;
+}
+
+#event03 .NPC {
+  background-image: url(../images/ohimesama.png);
+  width:305px;
+  height:450px;
+  margin-left: -152px;
+  top:140px;
+}
+
+#ending img {
+  display: block;
+  margin: 200px auto;
+}
+
+/* 勇者は死んでしまった */
+#event14 img {
+  display: block;
+  width: 400px;
+  margin: 10px auto;
+}
+
+/* Map */
+#map {
+  background: burlywood;
+}
+
+#map .PC,
+#control .PC
+ {
+  position: absolute;
+  left:30px;
+  top:360px;
+  height:150px;
+  width: 115px;
+  transform:translateZ(150px);
+}
+
+#control .PC .arrows img {
+  position: absolute;
+}
+
+#control .PC .arrows .top {
+  left:50%;
+  margin-left: -25px;
+}
+
+#control .PC .arrows .right {
+  top:50%;
+  right:0;
+  margin-top: -25px;
+}
+
+#control .PC .arrows .bottom {
+  left:50%;
+  bottom:0;
+  margin-left: -25px;
+}
+
+#control .PC .arrows .left {
+  top:50%;
+  margin-top: -25px;
+}
+
+/* Map */
+#map .compass {
+  position: absolute;
+}
+#map ul {
+  width: 900px;
+  height: 600px;
+  display: block;
+  margin:0 0 0 -50px;
+  padding: 0;
+}
+
+#map li {
+  float:left;
+  list-style: none;
+  background-size: 100px;
+  background-repeat: no-repeat;
+  width: 100px;
+  height:100px;
+  margin:0 0 -40px 0;
+}
+
+#map li.mountain{
+  background-image: url(../images/yukiyama.png);
+}
+
+#map li.plain{
+  background-image: url(../images/fabric_mark_circle.png);
+  transform:perspective(1200px) rotateX(60deg) translateY(40px);
+  z-index: 0;
+}
+
+#map li.castle {
+  background-image: url(../images/landmark_neuschwanstein.png);
+}
+
+#map li.city {
+  background-image: url(../images/firenze.png);
+}
+
+#map li.forest {
+  background-image: url(../images/mori.png);
+  transform:translateZ(40px);
+}
+
+#map li.cave {
+  background-image: url(../images/doukutsu.png);
+}
+
+#map .textframe {
+  width:800px;
+  height:300px;
+  position: absolute;
+  top:360px;
+  background-image: url(../images/room15_blank.png);
+}
+
+/* Battle */
+
+.enemy img {
+  display:block;
+  margin: 10px auto;
+}
+.command p span{
+  width: 1em;
+}
